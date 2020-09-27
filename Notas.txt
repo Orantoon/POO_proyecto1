@@ -1,0 +1,25 @@
+Que vamos a hacer
+
+* Comprar/Vender Items (Diferentes precios)
+* Dinero
+* Categorias de Atributos
+* Un personaje con 5 stats
+* Stats modificables (Consumibles, armadura)
+* Preview Stats
+* Equipar
+* Inventario (si posee el item, cuantos, si equipado)
+* API externo para obtener info (nombres, precios, categorias, stats)
+* 
+Debe existir alguna fórmula de transformación del producto real
+al item de la tienda. Por ejemplo, puede usar la calificación del
+producto como un modificador para los stats. En general, sean
+creativos a la hora de adaptar el producto real al tema seleccionado.????
+* 
+* POO
+* Interfaz grafica
+* Github
+
+
+* Stats: Health, Armor, Speed/Agility, Damage, Magic/Experience.
+* Inventory (class Player): max. 10 - 30. 20?
+* 
