@@ -3,8 +3,7 @@ package app;
 
 public class Store {
     //Atributes
-    private Player jugador;
-    private int [] items;
+    private int [] items = new int[20];
     private int price;
     private int stats1;
 
@@ -14,13 +13,13 @@ public class Store {
     }
 
     //Methods
-    public void buyItem(){
+    public void buyItem(Player jugador){
         jugador.money -= price;
         jugador.inventory[0] = items[0];
         jugador.stats[0] += stats1;
         items[0] = 0;
     }    
-    public void sellItem(){
+    public void sellItem(Player jugador){
         jugador.money += price;
         items[0] = jugador.inventory[0];
         jugador.stats[0] -= stats1;

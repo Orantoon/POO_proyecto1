@@ -21,7 +21,7 @@ public class App {
             System.out.println(jugador.stats[i]);
         }
 
-        tienda.buyItem();
+        tienda.buyItem(jugador);
 
         System.out.println("Inventario Final");
         for (int i = 0; i < 20; i++){
