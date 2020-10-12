@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="RPGStore">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/RPGStore/json-20140107.jar!/" />
+      <root url="jar://$PROJECT_DIR$/RPGStore/okio-1.13.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/RPGStore/okhttp-3.9.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

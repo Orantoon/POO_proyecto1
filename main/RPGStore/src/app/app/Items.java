@@ -1,4 +1,5 @@
-/*package com.gamboa;
+package app;
+
 
 import java.io.IOException;
 
@@ -9,7 +10,7 @@ public class Items {
     int id;
     int[] stats; //5 Stats: Health, Armor, Speed/Agility, Damage, Magic/Experience.
     int sellP, buyP, amount;
-    Boolean consumable; //If it is, it disappears after use. //funcion afecta el inventario jugador (desaparece y deja stats)
+    boolean consumable; //If true, it disappears after use. //funcion afecta el inventario jugador (desaparece y deja stats)
 
     public Items(int id, String name, int[] stats, boolean consumable){
         this.id = id;
@@ -35,7 +36,7 @@ public class Items {
 
     //Identify and buy by using the id.
 
-    public Items[] initializeItems() throws IOException {
+    public static Items[] initializeItems() throws IOException {
         API api = new API();
         int[] ids = api.idArray();
 
