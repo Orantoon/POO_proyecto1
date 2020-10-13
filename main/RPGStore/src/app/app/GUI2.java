@@ -14,6 +14,7 @@ public class GUI2 {
     private final JFrame frame = new JFrame();
     private final JPanel panel = new JPanel();
     private final JPanel text = new JPanel();
+    private final JPanel seeStats = new JPanel();
     private final JPanel buttons = new JPanel();
     private final JLabel bg = new JLabel(new ImageIcon("main\\RPGStore\\Images\\Background.png"));
 
@@ -22,6 +23,10 @@ public class GUI2 {
     private final ImageIcon yes = new ImageIcon("main\\RPGStore\\Images\\yes.png");
     private final ImageIcon no = new ImageIcon("main\\RPGStore\\Images\\no.png");
 
+    private Player player = new Player();
+    private Store store = new Store();
+
+    private JLabel money = new JLabel(Integer.toString(player.money));
     private JLabel name = new JLabel("Name: ");
     private JLabel stats = new JLabel("Stats: ");
     private JLabel buyP = new JLabel("Buy Price: ");
@@ -30,6 +35,7 @@ public class GUI2 {
     private JLabel[] textL = {name,stats,buyP,sellP,amount};
 
     private final Font font = Font.createFont(Font.TRUETYPE_FONT, new File("main\\RPGStore\\Font\\pixelmix.ttf"));
+
 
     public GUI2() throws IOException, FontFormatException {
         //Basic Stuff
@@ -47,10 +53,14 @@ public class GUI2 {
         text.setBounds(70,243,150,350);//height 170
         text.setLayout(null);
         text.setBackground(new Color(0.0f, 0.0f, 0.0f, 0.0f)); //Transparent
+        seeStats.setBounds(346,20,720,160);
+        seeStats.setLayout(null);
+        seeStats.setBackground(new Color(0.0f, 0.0f, 0.0f, 0.0f)); //Transparent
         buttons.setBounds(42,450,200,220);
         buttons.setLayout(null);
         buttons.setBackground(new Color(0.0f, 0.0f, 0.0f, 0.0f)); //Transparent
 
+        moneyUpdate();
         frame.add(bg);
         loadImagesText();
 
@@ -69,6 +79,15 @@ public class GUI2 {
                 textL[i].setBounds(0,30*i,150,20);
             }
         }
+    }
+
+    private void moneyUpdate(){
+        money.setText(Integer.toString(player.money));
+        money.setFont(font.deriveFont(14f));
+        money.setForeground(Color.WHITE);
+        money.setBounds(0,0,50,20);
+        seeStats.add(money);
+        frame.add(seeStats);
     }
 
     private void BuySellButtons(){
@@ -116,7 +135,7 @@ public class GUI2 {
             y = e.getY();
             int r=-1, c=-1;
 
-            //System.out.println("x = " + x + ", y = " + y);
+            System.out.println("x = " + x + ", y = " + y);
 
             if ((x > 329 && x < 777) && (y > 264 && y < 651)){
                 x -= 329;
@@ -160,6 +179,7 @@ public class GUI2 {
         }
     };
 
+
     private void changePanel(int r, int c){
         frame.getContentPane().removeAll();
         panel.removeAll();
@@ -181,6 +201,7 @@ public class GUI2 {
         text.add(amount);
 
         BuySellButtons();
+        moneyUpdate();
 
         frame.add(text);
         frame.add(panel);

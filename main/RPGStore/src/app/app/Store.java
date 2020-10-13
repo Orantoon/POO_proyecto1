@@ -5,7 +5,7 @@ import java.io.IOException;
 
 public class Store {
     //Attributes
-    public final Items[] inventario = new Items[20];         // inventario de la tienda
+    public Items[] inventario = new Items[20];         // inventario de la tienda
     private final Items[] items = initializeItems();
 
     //Constructor
@@ -25,8 +25,7 @@ public class Store {
         jugador.inventory[index] = null;
     }
     public void initializeStore(){
-        for (int i = 0; i < 20; i++)
-            inventario[i] = items[i];
+        inventario = items;
     }
 
     // Uso de id para transferir entre interfaz y codigo

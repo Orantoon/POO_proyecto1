@@ -32,7 +32,7 @@ public class Player {
         money = 2500;
 
         for (int i = 0; i < 5; i++){
-            stats[i] = 0;
+            stats[i] = 1;
         }
         for (int i = 0; i < 20; i++){
             inventory[i] = null;
