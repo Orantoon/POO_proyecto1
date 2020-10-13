@@ -3,7 +3,6 @@ package app;
 
 public class Player {
     //Attributes
-    private String name;
     public int money;
     public int[] stats = new int[5];    // Importante para inicializar arreglos
     public int[] inventory = new int[28];
@@ -13,23 +12,40 @@ public class Player {
         initializePlayer();
     }
 
-    public void useItem(Store store, int index){
-        if (store.idConv(inventory[index]).inUse){
-            for (int i = 0; i < 5; i++)
-                stats[i] += store.idConv(inventory[index]).stats[i];
-            if (store.idConv(inventory[index]).consumable)    // Si es consumible desaparece
-                inventory[index] = 0;
-        }
-        else {
-            for (int i = 0; i < 5; i++)
-                stats[i] -= store.idConv(inventory[index]).stats[i];
+    public void consumeUse(Store store, int index){
+        Items item = store.idConv(inventory[index]);
+        if (item.consumable){
+            inventory[index] = 0;   //Disappears if consumable
+            for (int i = 0; i < 5; i++){
+                stats[i] += item.stats[i];
+            }
+        } else {
+            for (int i = 0; i < 5; i++){
+                if (item.inUse)
+                    stats[i] -= item.stats[i];
+                else
+                    stats[i] += item.stats[i];
+            } item.inUse = !item.inUse; //Equipped and unequipped
         }
     }
 
+    public boolean isRep(int id) {
+        boolean flag = false;
+        for (int i = 0; i < 25; i++) {
+            if (id == inventory[i]) {
+                if (flag)
+                    return true;
+                else
+                    flag = true;
+            }
+        }
+        return false;
+    }
+
+
     //Methods
     public void initializePlayer() {
-        name = "Diego";
-        money = 2500;
+        money = 5500; //55000 to buy all
 
         for (int i = 0; i < 5; i++){
             stats[i] = 1;

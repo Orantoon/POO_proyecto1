@@ -14,37 +14,45 @@ public class GUI2 {
     private final Player player = new Player();
     private final Store store = new Store();
 
+    //Frame and Panels
     private final JFrame frame = new JFrame();
     private final JPanel panel = new JPanel();
     private final JPanel text = new JPanel();
     private final JPanel rightPanel = new JPanel();
     private final JPanel inventoryP = new JPanel();
     private final JPanel buttons = new JPanel();
+
+    //Arrays of Labels used for loading various images
+    private final JLabel[] images = new JLabel[20];
+    private final JLabel[] imagesInv = new JLabel[20];
+    private final JLabel[] imagesRep = new JLabel[5];
+
+    //Images needed once or twice
     private final JLabel bg = new JLabel(new ImageIcon("main\\RPGStore\\Images\\Background.png"));
-
-    private JLabel[] images = new JLabel[20];
-    private JLabel[] imagesInv = new JLabel[20];
-    private JLabel[] imagesRep = new JLabel[5];
-
     private final ImageIcon yes = new ImageIcon("main\\RPGStore\\Images\\yes.png");
     private final ImageIcon no = new ImageIcon("main\\RPGStore\\Images\\no.png");
 
-    private JLabel money = new JLabel(Integer.toString(player.money));
-    private JLabel name = new JLabel("Name: ");
-    private JLabel stats = new JLabel("Stats: ");
-    private JLabel buyP = new JLabel("Buy Price: ");
-    private JLabel sellP = new JLabel("Sell Price: ");
-    private JLabel amount = new JLabel("Amount: ");
-    private JLabel[] textL = {name,stats,buyP,sellP,amount};
+    //Labels used for the text panel (Info of Item)
+    private final JLabel money = new JLabel(Integer.toString(player.money));
+    private final JLabel name = new JLabel("Name: ");
+    private final JLabel stats = new JLabel("Stats: ");
+    private final JLabel buyP = new JLabel("Buy Price: ");
+    private final JLabel sellP = new JLabel("Sell Price: ");
+    private final JLabel amount = new JLabel("Amount: ");
+    private final JLabel[] textL = {name,stats,buyP,sellP,amount};
 
-    private JLabel[] seeStats = new JLabel[5];
-    private JLabel[] previewS = new JLabel[5];
+    //Labels used for the Stats of the Player and preview of them
+    private final JLabel[] seeStats = new JLabel[5];
+    private final JLabel[] previewS = new JLabel[5];
 
+    //Used to identify current item
     private int selectedInd,lastR,lastC;
 
+    //Font
     private final Font font = Font.createFont(Font.TRUETYPE_FONT, new File("main\\RPGStore\\Font\\pixelmix.ttf"));
 
 
+    //Constructor
     public GUI2() throws IOException, FontFormatException {
         //Basic Stuff
         int Width=1100, Height=700;
@@ -57,21 +65,24 @@ public class GUI2 {
 
         initializePanels();
 
+        //Starting Screen
         moneyUpdate();
         setSeeStats();
         frame.add(bg);
         loadImagesText();
 
+        //Activates if the mouse is clicked
         frame.addMouseListener(mouse);
 
         frame.setVisible(true);
     }
 
+
     private void initializePanels(){
         panel.setBounds(80,60,121,164);
-        panel.setLayout(null);
+        panel.setLayout(null); //So I can set my own layout
 
-        text.setBounds(70,243,150,350);//height 170
+        text.setBounds(70,243,150,350);
         text.setLayout(null);
         text.setBackground(new Color(0.0f, 0.0f, 0.0f, 0.0f)); //Transparent
 
@@ -88,6 +99,8 @@ public class GUI2 {
         buttons.setBackground(new Color(0.0f, 0.0f, 0.0f, 0.0f)); //Transparent
     }
 
+
+    //Loads the images into their array labels and configures the text labels
     private void loadImagesText(){
         for (int i = 0; i < 20; i++){
             images[i] = new JLabel(new ImageIcon("main\\RPGStore\\Images\\View Items\\"+(i/4)+(i%4)+".png"));
@@ -97,7 +110,7 @@ public class GUI2 {
                 textL[i].setFont(font.deriveFont(14f));
                 textL[i].setForeground(Color.WHITE);
                 textL[i].setBounds(0,30*i,150,20);
-                imagesRep[i] = new JLabel(new ImageIcon("main\\RPGStore\\Images\\Inventory\\"+(i/4)+(i%4)+".png"));;
+                imagesRep[i] = new JLabel(new ImageIcon("main\\RPGStore\\Images\\Inventory\\0"+(i%4)+".png"));
 
                 if (i == 4){
                     imagesRep[i] = new JLabel(new ImageIcon("main\\RPGStore\\Images\\Inventory\\32.png"));
@@ -106,16 +119,18 @@ public class GUI2 {
         }
     }
 
+
     private void moneyUpdate(){
         money.setText(Integer.toString(player.money));
         money.setFont(font.deriveFont(14f));
         money.setForeground(Color.WHITE);
-        money.setBounds(0,0,50,20);
+        money.setBounds(0,0,70,20);
         rightPanel.add(money);
         frame.add(rightPanel);
     }
 
-    private void setSeeStats(){
+
+    private void setSeeStats(){ //Current Stats of the player
         String[] names = {"Health","Armor","Speed","Damage","Magic"};
 
         for (int i = 0; i < 5; i++){
@@ -123,13 +138,14 @@ public class GUI2 {
             seeStats[i].setFont(font.deriveFont(18f));
             seeStats[i].setForeground(Color.WHITE);
             seeStats[i].setBounds(490,5+30*i,350,20);
-            seeStats[i].setText(names[i]+": "+player.stats[i]+"/15");
+            seeStats[i].setText(names[i]+": "+player.stats[i]+"/20");
             rightPanel.add(seeStats[i]);
         }
         frame.add(rightPanel);
     }
 
-    private void setPreviewS(Items item){
+
+    private void setPreviewS(Items item){ //Preview of stats of an item if bought
         for (int i = 0; i < 5; i++){
             previewS[i] = new JLabel();
             previewS[i].setFont(font.deriveFont(18f));
@@ -141,10 +157,11 @@ public class GUI2 {
         } frame.add(rightPanel);
     }
 
+
     private void BuySellButtons(){
         //Text
         JLabel buy = new JLabel("Buy?");
-        JLabel sell = new JLabel("Sell? ");//("Sell? "+amount of item in inventory+" in Inventory");
+        JLabel sell = new JLabel("Sell? ");
 
         buy.setFont(font.deriveFont(14f));
         sell.setFont(font.deriveFont(14f));
@@ -157,33 +174,55 @@ public class GUI2 {
         text.add(buy);
         text.add(sell);
 
+        //Buttons
         JButton yes1 = new JButton(yes);
         JButton no1 = new JButton(no);
-        yes1.setBounds(0,0,97,53);
-        no1.setBounds(97,0,97,53);
-        buttons.add(yes1);
-        buttons.add(no1);
-
-        yes1.addActionListener(BUY);
-
         JButton yes2 = new JButton(yes);
         JButton no2 = new JButton(no);
-        yes2.setBounds(0,90,97,53);
-        no2.setBounds(97,90,97,53);
-        buttons.add(yes2);
-        buttons.add(no2);
 
+
+        JButton[] botones = {yes1,no1,yes2,no2};
+        for (int i = 0; i < 4; i++){
+            int x, y;
+
+            x = 97;
+            if (i%2==0)
+                x = 0;
+
+            y = 90;
+            if (i < 2){
+                y = 0;
+            }
+            botones[i].setBounds(x,y,97,53);
+            buttons.add(botones[i]);
+        }
+
+        //Action
+        yes1.addActionListener(BUY);
         yes2.addActionListener(SELL);
 
         frame.add(buttons);
     }
 
-    private void setInvImages(){
+    private void ELetter(JLabel[] E, int i, int r, int c){ //E for Equipped
+        E[i] = new JLabel();
+        E[i].setText("E");
+        E[i].setFont(font.deriveFont(14f));
+        E[i].setForeground(Color.WHITE);
+        E[i].setBounds(45+64*c,40+64*r,12,25);
+        inventoryP.add(E[i]);
+    }
 
-        int r = 0, c = 0,ind=0;
+
+    private void setInvImages(){ //Images of the Inventory
+
+        JLabel[] E = new JLabel[25];
+
+        int r, c,ind;
         boolean first = true;
 
         for (int i = 0; i < 25; i++){
+
             int id = player.inventory[i];
             if (id != 0){
                 r= i/4;
@@ -192,7 +231,7 @@ public class GUI2 {
 
                 JLabel itemInv;
 
-                if (store.isRep(id)){
+                if (player.isRep(id)){
                     if (first){
                         itemInv = imagesInv[ind];
                         first = false;
@@ -206,17 +245,21 @@ public class GUI2 {
 
                 } else {
                     itemInv = imagesInv[ind];
-                    first = true;
                 }
 
                 itemInv.setBounds(64*c,5+64*r,64,64);
                 itemInv.setHorizontalAlignment(itemInv.CENTER);
                 itemInv.setVerticalAlignment(itemInv.CENTER);
-                inventoryP.add(itemInv);
 
+                if (store.idConv(id).inUse)
+                    ELetter(E,i,r,c);
+
+                inventoryP.add(itemInv);
             }
         }
     }
+
+
 
     MouseListener mouse = new MouseListener() {
         @Override
@@ -228,6 +271,7 @@ public class GUI2 {
 
             //System.out.println("x = " + x + ", y = " + y);
 
+            //Click on Items in the Middle
             if ((x > 329 && x < 777) && (y > 264 && y < 651)){
                 x -= 329;
                 y -= 264;
@@ -237,21 +281,26 @@ public class GUI2 {
                     r = (int) y/86;
 
                 if (r!=-1 && c!= -1){
-                    changePanel(r,c); //System.out.println(r+""+c);
+                    changePanel(r,c);
                     lastR = r;
                     lastC = c;
                     selectedInd = 4*r+c;
                 }
             }
 
+            //Click on Inventory
             if ((x > 820 && x < 1075) && (y > 225 && y < 670)){
                 x -= 820;
                 y -= 225;
 
                 c = (int) x/65;
                 r = (int) y/65;
-                System.out.println(r+" "+c);
+                //System.out.println(r+" "+c);
                 int indexInv = 4*r + c;
+
+                if (player.inventory[indexInv] != 0)
+                    player.consumeUse(store,indexInv);
+                changePanel(lastR,lastC);
             }
         }
 
@@ -273,7 +322,6 @@ public class GUI2 {
         @Override
         public void actionPerformed(ActionEvent e) {
             store.buyItem(player,selectedInd);
-            System.out.println("BUY!");
             changePanel(lastR,lastC);
         }
     };
@@ -282,19 +330,20 @@ public class GUI2 {
         @Override
         public void actionPerformed(ActionEvent e) {
             store.sellItem(player,selectedInd);
-            System.out.println("SELL!");
             changePanel(lastR,lastC);
         }
     };
 
 
     private void changePanel(int r, int c){
+        //Removes everything to update
         frame.getContentPane().removeAll();
         panel.removeAll();
         text.removeAll();
         rightPanel.removeAll();
         inventoryP.removeAll();
 
+        //Image used on the Left Panel
         JLabel v = images[4*r+c];
 
         v.setBounds(0,0,121,164);
@@ -303,6 +352,7 @@ public class GUI2 {
         //Items item = store.inventario[4*r+c];
         Items item = store.idConv(store.inventario[4*r+c]);
 
+        //Info of the Item
         name.setText(item.name);
         name.setHorizontalAlignment(name.CENTER);
         stats.setText("Stats: "+item.stats[0]+"/"+item.stats[1]+"/"+item.stats[2]+"/"+item.stats[3]+"/"+item.stats[4]);
@@ -316,12 +366,12 @@ public class GUI2 {
         text.add(sellP);
         text.add(amount);
 
+        //Update Every Panel
         BuySellButtons();
         setSeeStats();
         setPreviewS(item);
         moneyUpdate();
         setInvImages();
-
 
         frame.add(text);
         frame.add(panel);
