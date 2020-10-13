@@ -40,8 +40,13 @@ public class Store {
     }
 
     public static Items[] initializeItems() throws IOException {
-        API api = new API();
-        int[] ids = api.idArray();
+        //API api = new API();
+        //int[] ids = api.idArray();
+        int[] ids = {200003482,200001648,100003141,200000783,
+                200000775,200118010,200215341,200000785,
+                200001092,200215336,200000782,205871601,
+                205874801,205876401,205895301,205900902,
+                205927403,100003084,200000707,200000662};
 
         String[] name = {"Antibody","Potion of Health","Cheese","Medkit",
                 "Shield","Heavy Boots","Gun Knight Helmet","Armor of Thorns",

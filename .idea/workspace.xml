@@ -25,15 +25,11 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
   </component>
   <component name="RunManager">
-    <configuration name="GUI" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="app.GUI2" />
-      <module name="POO_proyecto1" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -41,6 +37,13 @@
         </value>
       </option>
       <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GUI" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="app.GUI2" />
+      <module name="POO_proyecto1" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -82,5 +85,9 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state width="1491" height="224" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1602553052946" />
+    <state x="249" y="6" key="SettingsEditor" timestamp="1602558965177">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="249" y="6" key="SettingsEditor/0.0.1536.864@0.0.1536.864" timestamp="1602558965177" />
   </component>
 </project>
