@@ -25,6 +25,7 @@ public class GUI2 {
 
     private Player player = new Player();
     private Store store = new Store();
+    private int index;
 
     private JLabel money = new JLabel(Integer.toString(player.money));
     private JLabel name = new JLabel("Name: ");
@@ -147,6 +148,7 @@ public class GUI2 {
 
                 if (r!=-1 && c!= -1){
                     changePanel(r,c); //System.out.println(r+""+c);
+                    index = (r * 4 + c);
                 }
             }
         }
@@ -168,6 +170,7 @@ public class GUI2 {
     ActionListener BUY = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
+            store.buyItem(player,index);
             System.out.println("BUY!");
         }
     };
@@ -175,6 +178,7 @@ public class GUI2 {
     ActionListener SELL = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
+            store.sellItem(player,index);
             System.out.println("SELL!");
         }
     };

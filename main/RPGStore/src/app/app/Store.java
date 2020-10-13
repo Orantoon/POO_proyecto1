@@ -5,7 +5,7 @@ import java.io.IOException;
 
 public class Store {
     //Attributes
-    public Items[] inventario = new Items[20];         // inventario de la tienda
+    public int[] inventario = new int[20];         // inventario de la tienda
     private final Items[] items = initializeItems();
 
     //Constructor
@@ -15,27 +15,39 @@ public class Store {
 
     //Methods
     public void buyItem(Player jugador, int index){
-        jugador.money -= items[index].buyP;
-        jugador.inventory[index] = inventario[index];
-        inventario[index] = null;
+        if (idConv(inventario[index]).amount > 0){
+            jugador.money -= items[index].buyP;
+            for (int i = 0; i < 20; i++){
+                if (jugador.inventory[i] == 0){
+                    jugador.inventory[i] = inventario[index];
+                    idConv(inventario[index]).amount -= 1;
+                }
+            }
+        }
     }
     public void sellItem(Player jugador, int index){
-        jugador.money += items[index].sellP;
-        inventario[index] = jugador.inventory[index];
-        jugador.inventory[index] = null;
+        for (int i = 0; i < 20; i++){
+            if (jugador.inventory[i] == inventario[index]){    // Vende el primer item de tal tipo que encuentre
+                jugador.money += items[index].sellP;
+                idConv(inventario[index]).amount += 1;
+                jugador.inventory[i] = 0;
+                return;
+            }
+        }
     }
     public void initializeStore(){
-        inventario = items;
+        for (int i = 0; i < 20; i++){
+            inventario[i] = items[i].id;
+        }
     }
 
-    // Uso de id para transferir entre interfaz y codigo
-    public int idConv(int id) {
-        int index = 0;
+    // Uso de id para encontrar informacion
+    public Items idConv(int id) {
         for (int i = 0; i < 20; i++){
             if (items[i].id == id)
-                index = i;
+                return items[i];
         }
-        return index;
+        return null;
     }
 
     public static Items[] initializeItems() throws IOException {
