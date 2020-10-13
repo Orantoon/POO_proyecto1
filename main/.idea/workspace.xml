@@ -38,9 +38,12 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
+    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.GUI2">
     <configuration name="App" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="app.App" />
       <module name="main" />
@@ -48,6 +51,28 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="GUI2" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="app.GUI2" />
+      <module name="main" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.App" />
+      <item itemvalue="Application.GUI2" />
+    </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -74,16 +99,17 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
     <state x="552" y="198" width="816" height="729" key="#Intentions" timestamp="1602489642475">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="552" y="198" width="816" height="729" key="#Intentions/0.0.1920.1080@0.0.1920.1080" timestamp="1602489642475" />
-    <state x="414" y="195" width="1092" height="714" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1602464000642">
+    <state x="414" y="195" width="1092" height="738" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1602558125047">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="414" y="195" width="1092" height="714" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1602464000642" />
+    <state x="414" y="195" width="1092" height="738" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1602558125047" />
     <state x="765" y="256" key="#com.intellij.ide.util.MemberChooser" timestamp="1602490156551">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -92,22 +118,30 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="743" y="434" width="433" height="217" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1920.1080@0.0.1920.1080" timestamp="1602466564007" />
-    <state width="1877" height="205" key="GridCell.Tab.0.bottom" timestamp="1602492779283">
+    <state x="666" y="281" key="FileChooserDialogImpl" timestamp="1602558237362">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1877" height="205" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1602492779283" />
-    <state width="1877" height="205" key="GridCell.Tab.0.center" timestamp="1602492779282">
+    <state x="666" y="281" key="FileChooserDialogImpl/0.0.1920.1080@0.0.1920.1080" timestamp="1602558237362" />
+    <state width="1877" height="236" key="GridCell.Tab.0.bottom" timestamp="1602558241813">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1877" height="205" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1602492779282" />
-    <state width="1877" height="205" key="GridCell.Tab.0.left" timestamp="1602492779282">
+    <state width="1877" height="236" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1602558241813" />
+    <state width="1877" height="236" key="GridCell.Tab.0.center" timestamp="1602558241813">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1877" height="205" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1602492779282" />
-    <state width="1877" height="205" key="GridCell.Tab.0.right" timestamp="1602492779283">
+    <state width="1877" height="236" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1602558241813" />
+    <state width="1877" height="236" key="GridCell.Tab.0.left" timestamp="1602558241812">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1877" height="205" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1602492779283" />
+    <state width="1877" height="236" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1602558241812" />
+    <state width="1877" height="236" key="GridCell.Tab.0.right" timestamp="1602558241813">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1877" height="236" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1602558241813" />
+    <state x="440" y="114" key="SettingsEditor" timestamp="1602557971880">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="440" y="114" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1602557971880" />
     <state x="803" y="297" key="refactoring.ChangeSignatureDialog" timestamp="1602490158443">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>

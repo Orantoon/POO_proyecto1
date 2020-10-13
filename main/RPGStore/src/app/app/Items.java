@@ -10,7 +10,7 @@ public class Items {
     int id;
     int[] stats; //5 Stats: Health, Armor, Speed/Agility, Damage, Magic/Experience.
     int sellP, buyP, amount;
-    boolean consumable; //If true, it disappears after use. //funcion afecta el inventario jugador (desaparece y deja stats)
+    boolean consumable, inUse; //If true, it disappears after use. //funcion afecta el inventario jugador (desaparece y deja stats)
 
     public Items(int id, String name, int[] stats, boolean consumable){
         this.id = id;
@@ -19,6 +19,7 @@ public class Items {
         this.consumable = consumable;
         this.buyP = 200*stats[0] + 350*stats[1] + 150*stats[2] + 300*stats[3] + 500*stats[4];
         this.sellP = (int) (buyP*0.7);
+        this.inUse = false;
         if (consumable)
             amount = 2;
         else
@@ -32,37 +33,6 @@ public class Items {
         System.out.println("Buy Price: "+buyP+", Sell Price: "+ sellP);
         System.out.println("Amount: "+amount);
         System.out.println("Consumable? "+consumable+"\n");
-    }
-
-    //Identify and buy by using the id.
-
-    public static Items[] initializeItems() throws IOException {
-        API api = new API();
-        int[] ids = api.idArray();
-
-        String[] name = {"Antibody","Potion of Health","Cheese","Medkit",
-                "Shield","Heavy Boots","Gun Knight Helmet","Armor of Thorns",
-                "Bomb","Huntsman", "Glacier", "Laser Rifle",
-                "Hermes Boots","Jetpack","Speed Vial","Ruby Bracelet",
-                "Rolling Eye","Demon Head","Ring of Fire Resistance","Sense of Direction"};
-
-        //statsPersonaje = {0,0,0,0,0} //statsPreview funcion que agarra las del personaje
-        int[][] stats = {{2,0,0,0,0},{3,0,0,0,0},{1,0,0,0,0},{3,0,0,0,0},
-                {0,1,0,0,0},{0,1,1,0,0},{0,3,0,0,0},{0,4,0,0,0},
-                {0,0,0,2,0},{0,0,0,4,0},{0,0,1,1,0},{0,0,1,3,0},
-                {0,1,3,0,0},{0,0,4,0,0},{0,0,1,0,0},{0,0,2,0,0},
-                {0,0,0,1,3},{0,0,0,0,4},{0,1,0,0,1},{0,0,0,0,2}};
-
-        boolean[] cons = new boolean[20];
-        for (int i = 0; i < 20; i++)
-            cons[i] = i < 4 || i == 14;
-
-        Items[] itemsList = new Items[20];
-        for (int i = 0; i < 20; i++) {
-            itemsList[i] = new Items(ids[i], name[i], stats[i], cons[i]);
-            //itemsList[i].Attributes(); //If want to test, transform this into main.
-        }
-        return itemsList;
     }
 }
 
