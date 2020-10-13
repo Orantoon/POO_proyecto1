@@ -16,15 +16,19 @@ public class Store {
     //Methods
     public void buyItem(Player jugador, int index){
         if (idConv(inventario[index]).amount > 0){
-            jugador.money -= items[index].buyP;
-            for (int i = 0; i < 20; i++){
-                if (jugador.inventory[i] == 0){
-                    jugador.inventory[i] = inventario[index];
-                    idConv(inventario[index]).amount -= 1;
+            if (jugador.money >= items[index].buyP){
+                jugador.money -= items[index].buyP;
+                for (int i = 0; i < 20; i++){
+                    if (jugador.inventory[i] == 0){
+                        jugador.inventory[i] = inventario[index];
+                        idConv(inventario[index]).amount -= 1;
+                        return;
+                    }
                 }
             }
         }
     }
+
     public void sellItem(Player jugador, int index){
         for (int i = 0; i < 20; i++){
             if (jugador.inventory[i] == inventario[index]){    // Vende el primer item de tal tipo que encuentre
@@ -50,6 +54,27 @@ public class Store {
         return null;
     }
 
+    public int indexID(int id){
+        for (int i = 0; i < 20; i++) {
+            if (id == inventario[i]){
+                return i;
+            }
+        } return -1;
+    }
+
+    public boolean isRep(int id){
+        boolean flag = false;
+        for (int i = 0; i < 20; i++){
+            if (id == inventario[i]){
+                if (flag)
+                    return true;
+                else
+                    flag = true;
+            }
+        }
+        return false;
+    }
+
     public static Items[] initializeItems() throws IOException {
         //API api = new API();
         //int[] ids = api.idArray();
@@ -59,11 +84,11 @@ public class Store {
                 205874801,205876401,205895301,205900902,
                 205927403,100003084,200000707,200000662};
 
-        String[] name = {"Antibody","Potion of Health","Cheese","Medkit",
-                "Shield","Heavy Boots","Gun Knight Helmet","Armor of Thorns",
+        String[] name = {"Antibody","Healing Potion","Cheese","Medkit",
+                "Shield","Heavy Boots","Gun Helmet","Thorn Armor",
                 "Bomb","Huntsman", "Glacier", "Laser Rifle",
                 "Hermes Boots","Jetpack","Speed Vial","Ruby Bracelet",
-                "Rolling Eye","Demon Head","Ring of Fire Resistance","Sense of Direction"};
+                "Rolling Eye","Demon Head","Ring of Fire","One Direction"};
 
         //statsPersonaje = {0,0,0,0,0} //statsPreview funcion que agarra las del personaje
         int[][] stats = {{2,0,0,0,0},{3,0,0,0,0},{1,0,0,0,0},{3,0,0,0,0},

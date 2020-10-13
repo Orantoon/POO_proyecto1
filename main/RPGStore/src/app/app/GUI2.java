@@ -24,6 +24,7 @@ public class GUI2 {
 
     private JLabel[] images = new JLabel[20];
     private JLabel[] imagesInv = new JLabel[20];
+    private JLabel[] imagesRep = new JLabel[5];
 
     private final ImageIcon yes = new ImageIcon("main\\RPGStore\\Images\\yes.png");
     private final ImageIcon no = new ImageIcon("main\\RPGStore\\Images\\no.png");
@@ -39,7 +40,7 @@ public class GUI2 {
     private JLabel[] seeStats = new JLabel[5];
     private JLabel[] previewS = new JLabel[5];
 
-    private int selectedInd;
+    private int selectedInd,lastR,lastC;
 
     private final Font font = Font.createFont(Font.TRUETYPE_FONT, new File("main\\RPGStore\\Font\\pixelmix.ttf"));
 
@@ -96,6 +97,11 @@ public class GUI2 {
                 textL[i].setFont(font.deriveFont(14f));
                 textL[i].setForeground(Color.WHITE);
                 textL[i].setBounds(0,30*i,150,20);
+                imagesRep[i] = new JLabel(new ImageIcon("main\\RPGStore\\Images\\Inventory\\"+(i/4)+(i%4)+".png"));;
+
+                if (i == 4){
+                    imagesRep[i] = new JLabel(new ImageIcon("main\\RPGStore\\Images\\Inventory\\32.png"));
+                }
             }
         }
     }
@@ -174,18 +180,42 @@ public class GUI2 {
 
     private void setInvImages(){
 
-        //Reconocer ID, y con base a este poner imagen [index]
+        int r = 0, c = 0,ind=0;
+        boolean first = true;
 
-        for (int r = 0; r < 5; r++) { //7
-            for (int c = 0; c < 4; c++) {
-                JLabel itemInv = imagesInv[4*r+c];
+        for (int i = 0; i < 25; i++){
+            int id = player.inventory[i];
+            if (id != 0){
+                r= i/4;
+                c= i%4;
+                ind = store.indexID(id);
+
+                JLabel itemInv;
+
+                if (store.isRep(id)){
+                    if (first){
+                        itemInv = imagesInv[ind];
+                        first = false;
+                    } else {
+                        if (ind > 4)
+                            ind = 4;
+
+                        itemInv = imagesRep[ind];
+                        first = true;
+                    }
+
+                } else {
+                    itemInv = imagesInv[ind];
+                    first = true;
+                }
+
                 itemInv.setBounds(64*c,5+64*r,64,64);
                 itemInv.setHorizontalAlignment(itemInv.CENTER);
                 itemInv.setVerticalAlignment(itemInv.CENTER);
                 inventoryP.add(itemInv);
+
             }
         }
-
     }
 
     MouseListener mouse = new MouseListener() {
@@ -208,6 +238,8 @@ public class GUI2 {
 
                 if (r!=-1 && c!= -1){
                     changePanel(r,c); //System.out.println(r+""+c);
+                    lastR = r;
+                    lastC = c;
                     selectedInd = 4*r+c;
                 }
             }
@@ -242,6 +274,7 @@ public class GUI2 {
         public void actionPerformed(ActionEvent e) {
             store.buyItem(player,selectedInd);
             System.out.println("BUY!");
+            changePanel(lastR,lastC);
         }
     };
 
@@ -250,6 +283,7 @@ public class GUI2 {
         public void actionPerformed(ActionEvent e) {
             store.sellItem(player,selectedInd);
             System.out.println("SELL!");
+            changePanel(lastR,lastC);
         }
     };
 
@@ -287,6 +321,7 @@ public class GUI2 {
         setPreviewS(item);
         moneyUpdate();
         setInvImages();
+
 
         frame.add(text);
         frame.add(panel);
