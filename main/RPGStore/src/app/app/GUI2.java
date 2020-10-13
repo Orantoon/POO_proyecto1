@@ -11,21 +11,22 @@ import java.io.IOException;
 
 public class GUI2 {
 
+    private final Player player = new Player();
+    private final Store store = new Store();
+
     private final JFrame frame = new JFrame();
     private final JPanel panel = new JPanel();
     private final JPanel text = new JPanel();
-    private final JPanel seeStats = new JPanel();
+    private final JPanel rightPanel = new JPanel();
+    private final JPanel inventoryP = new JPanel();
     private final JPanel buttons = new JPanel();
     private final JLabel bg = new JLabel(new ImageIcon("main\\RPGStore\\Images\\Background.png"));
 
     private JLabel[] images = new JLabel[20];
+    private JLabel[] imagesInv = new JLabel[20];
 
     private final ImageIcon yes = new ImageIcon("main\\RPGStore\\Images\\yes.png");
     private final ImageIcon no = new ImageIcon("main\\RPGStore\\Images\\no.png");
-
-    private Player player = new Player();
-    private Store store = new Store();
-    private int index;
 
     private JLabel money = new JLabel(Integer.toString(player.money));
     private JLabel name = new JLabel("Name: ");
@@ -34,6 +35,11 @@ public class GUI2 {
     private JLabel sellP = new JLabel("Sell Price: ");
     private JLabel amount = new JLabel("Amount: ");
     private JLabel[] textL = {name,stats,buyP,sellP,amount};
+
+    private JLabel[] seeStats = new JLabel[5];
+    private JLabel[] previewS = new JLabel[5];
+
+    private int selectedInd;
 
     private final Font font = Font.createFont(Font.TRUETYPE_FONT, new File("main\\RPGStore\\Font\\pixelmix.ttf"));
 
@@ -48,20 +54,10 @@ public class GUI2 {
         frame.setResizable (false);
         frame.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
 
-        //Initialize Panels
-        panel.setBounds(80,60,121,164);
-        panel.setLayout(null);
-        text.setBounds(70,243,150,350);//height 170
-        text.setLayout(null);
-        text.setBackground(new Color(0.0f, 0.0f, 0.0f, 0.0f)); //Transparent
-        seeStats.setBounds(346,20,720,160);
-        seeStats.setLayout(null);
-        seeStats.setBackground(new Color(0.0f, 0.0f, 0.0f, 0.0f)); //Transparent
-        buttons.setBounds(42,450,200,220);
-        buttons.setLayout(null);
-        buttons.setBackground(new Color(0.0f, 0.0f, 0.0f, 0.0f)); //Transparent
+        initializePanels();
 
         moneyUpdate();
+        setSeeStats();
         frame.add(bg);
         loadImagesText();
 
@@ -70,9 +66,31 @@ public class GUI2 {
         frame.setVisible(true);
     }
 
+    private void initializePanels(){
+        panel.setBounds(80,60,121,164);
+        panel.setLayout(null);
+
+        text.setBounds(70,243,150,350);//height 170
+        text.setLayout(null);
+        text.setBackground(new Color(0.0f, 0.0f, 0.0f, 0.0f)); //Transparent
+
+        rightPanel.setBounds(346,20,720,160);
+        rightPanel.setLayout(null);
+        rightPanel.setBackground(new Color(0.0f, 0.0f, 0.0f, 0.0f)); //Transparent
+
+        inventoryP.setBounds(810,190,255,445);
+        inventoryP.setLayout(null);
+        inventoryP.setBackground(new Color(0.0f, 0.0f, 0.0f, 0.0f)); //Transparent
+
+        buttons.setBounds(42,450,200,220);
+        buttons.setLayout(null);
+        buttons.setBackground(new Color(0.0f, 0.0f, 0.0f, 0.0f)); //Transparent
+    }
+
     private void loadImagesText(){
         for (int i = 0; i < 20; i++){
             images[i] = new JLabel(new ImageIcon("main\\RPGStore\\Images\\View Items\\"+(i/4)+(i%4)+".png"));
+            imagesInv[i] = new JLabel(new ImageIcon("main\\RPGStore\\Images\\Inventory\\"+(i/4)+(i%4)+".png"));
 
             if (i<5){
                 textL[i].setFont(font.deriveFont(14f));
@@ -87,8 +105,34 @@ public class GUI2 {
         money.setFont(font.deriveFont(14f));
         money.setForeground(Color.WHITE);
         money.setBounds(0,0,50,20);
-        seeStats.add(money);
-        frame.add(seeStats);
+        rightPanel.add(money);
+        frame.add(rightPanel);
+    }
+
+    private void setSeeStats(){
+        String[] names = {"Health","Armor","Speed","Damage","Magic"};
+
+        for (int i = 0; i < 5; i++){
+            seeStats[i] = new JLabel();
+            seeStats[i].setFont(font.deriveFont(18f));
+            seeStats[i].setForeground(Color.WHITE);
+            seeStats[i].setBounds(490,5+30*i,350,20);
+            seeStats[i].setText(names[i]+": "+player.stats[i]+"/15");
+            rightPanel.add(seeStats[i]);
+        }
+        frame.add(rightPanel);
+    }
+
+    private void setPreviewS(Items item){
+        for (int i = 0; i < 5; i++){
+            previewS[i] = new JLabel();
+            previewS[i].setFont(font.deriveFont(18f));
+            previewS[i].setForeground(Color.ORANGE);
+            previewS[i].setBounds(670,5+30*i,350,20);
+            if (item.stats[i] != 0)
+                previewS[i].setText("+"+item.stats[i]);
+            rightPanel.add(previewS[i]);
+        } frame.add(rightPanel);
     }
 
     private void BuySellButtons(){
@@ -128,6 +172,22 @@ public class GUI2 {
         frame.add(buttons);
     }
 
+    private void setInvImages(){
+
+        //Reconocer ID, y con base a este poner imagen [index]
+
+        for (int r = 0; r < 5; r++) { //7
+            for (int c = 0; c < 4; c++) {
+                JLabel itemInv = imagesInv[4*r+c];
+                itemInv.setBounds(64*c,5+64*r,64,64);
+                itemInv.setHorizontalAlignment(itemInv.CENTER);
+                itemInv.setVerticalAlignment(itemInv.CENTER);
+                inventoryP.add(itemInv);
+            }
+        }
+
+    }
+
     MouseListener mouse = new MouseListener() {
         @Override
         public void mouseClicked(MouseEvent e) {
@@ -136,7 +196,7 @@ public class GUI2 {
             y = e.getY();
             int r=-1, c=-1;
 
-            System.out.println("x = " + x + ", y = " + y);
+            //System.out.println("x = " + x + ", y = " + y);
 
             if ((x > 329 && x < 777) && (y > 264 && y < 651)){
                 x -= 329;
@@ -148,8 +208,18 @@ public class GUI2 {
 
                 if (r!=-1 && c!= -1){
                     changePanel(r,c); //System.out.println(r+""+c);
-                    index = (r * 4 + c);
+                    selectedInd = 4*r+c;
                 }
+            }
+
+            if ((x > 820 && x < 1075) && (y > 225 && y < 670)){
+                x -= 820;
+                y -= 225;
+
+                c = (int) x/65;
+                r = (int) y/65;
+                System.out.println(r+" "+c);
+                int indexInv = 4*r + c;
             }
         }
 
@@ -170,7 +240,7 @@ public class GUI2 {
     ActionListener BUY = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            store.buyItem(player,index);
+            store.buyItem(player,selectedInd);
             System.out.println("BUY!");
         }
     };
@@ -178,7 +248,7 @@ public class GUI2 {
     ActionListener SELL = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            store.sellItem(player,index);
+            store.sellItem(player,selectedInd);
             System.out.println("SELL!");
         }
     };
@@ -188,16 +258,24 @@ public class GUI2 {
         frame.getContentPane().removeAll();
         panel.removeAll();
         text.removeAll();
+        rightPanel.removeAll();
+        inventoryP.removeAll();
 
-        JLabel v = images[r * 4 + c];
+        JLabel v = images[4*r+c];
 
         v.setBounds(0,0,121,164);
         panel.add(v);
 
-        //Labels of text
-        //name.setText(itemList[r*4+c][indexName]);
+        //Items item = store.inventario[4*r+c];
+        Items item = store.idConv(store.inventario[4*r+c]);
 
+        name.setText(item.name);
         name.setHorizontalAlignment(name.CENTER);
+        stats.setText("Stats: "+item.stats[0]+"/"+item.stats[1]+"/"+item.stats[2]+"/"+item.stats[3]+"/"+item.stats[4]);
+        buyP.setText("Buy Price: " + item.buyP);
+        sellP.setText("Sell Price: "+item.sellP);
+        amount.setText("Amount: "+item.amount);
+
         text.add(name);
         text.add(stats);
         text.add(buyP);
@@ -205,10 +283,14 @@ public class GUI2 {
         text.add(amount);
 
         BuySellButtons();
+        setSeeStats();
+        setPreviewS(item);
         moneyUpdate();
+        setInvImages();
 
         frame.add(text);
         frame.add(panel);
+        frame.add(inventoryP);
         frame.add(bg);
 
         frame.revalidate();
