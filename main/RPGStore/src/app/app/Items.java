@@ -40,19 +40,22 @@ public class Items {
         API api = new API();
         int[] ids = api.idArray();
 
-        String[] name = {"Cabbage","Roasted Chicken","Sweet Roll","Potion of Healing","Daedric Helmet",
-                "Daedric Armor","Skaal Boots","Nightingale Gloves","Speed Potion","Hermes Boots",
-                "Agility Elixir", "Potion of Swiftness", "Iron Dagger","Nordic War Axe","Daedric Sword","Long Bow",
-                "Potion of Ultimate Magicka","Diary of a Deadman","Potion of Resist Magic","Wand of a Pillager"};
+        String[] name = {"Antibody","Potion of Health","Cheese","Medkit",
+                "Shield","Heavy Boots","Gun Knight Helmet","Armor of Thorns",
+                "Bomb","Huntsman", "Glacier", "Laser Rifle",
+                "Hermes Boots","Jetpack","Speed Vial","Ruby Bracelet",
+                "Rolling Eye","Demon Head","Ring of Fire Resistance","Sense of Direction"};
 
         //statsPersonaje = {0,0,0,0,0} //statsPreview funcion que agarra las del personaje
-        int[][] stats = {{1,0,0,0,0},{2,0,0,0,0},{2,0,0,0,0},{4,0,0,0,0},{0,2,0,0,0},{0,4,0,0,0},{0,2,1,0,0},{0,1,0,0,0},
-                {0,0,2,0,0},{0,1,4,0,0},{0,0,3,0,0},{0,0,4,0,0},{0,0,1,1,0},{0,0,0,3,0},{0,0,1,4,0},{0,0,1,2,0},
-                {0,0,0,1,3},{0,0,0,0,4},{0,1,0,0,1},{0,0,0,3,3}};
+        int[][] stats = {{2,0,0,0,0},{3,0,0,0,0},{1,0,0,0,0},{3,0,0,0,0},
+                {0,1,0,0,0},{0,1,1,0,0},{0,3,0,0,0},{0,4,0,0,0},
+                {0,0,0,2,0},{0,0,0,4,0},{0,0,1,1,0},{0,0,1,3,0},
+                {0,1,3,0,0},{0,0,4,0,0},{0,0,1,0,0},{0,0,2,0,0},
+                {0,0,0,1,3},{0,0,0,0,4},{0,1,0,0,1},{0,0,0,0,2}};
 
         boolean[] cons = new boolean[20];
         for (int i = 0; i < 20; i++)
-            cons[i] = i < 4 || i == 8 || (i > 9 && i < 12) || i == 16 || i == 18;
+            cons[i] = i < 4 || i == 14;
 
         Items[] itemsList = new Items[20];
         for (int i = 0; i < 20; i++) {

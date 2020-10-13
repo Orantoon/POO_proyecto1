@@ -1,4 +1,4 @@
-package com.gamboa;
+package app;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,12 +15,12 @@ public class GUI2 {
     private final JPanel panel = new JPanel();
     private final JPanel text = new JPanel();
     private final JPanel buttons = new JPanel();
-    private final JLabel bg = new JLabel(new ImageIcon("Images\\Background.png"));
+    private final JLabel bg = new JLabel(new ImageIcon("main\\RPGStore\\Images\\Background.png"));
 
     private JLabel[] images = new JLabel[20];
 
-    private final ImageIcon yes = new ImageIcon("Images\\yes.png");
-    private final ImageIcon no = new ImageIcon("Images\\no.png");
+    private final ImageIcon yes = new ImageIcon("main\\RPGStore\\Images\\yes.png");
+    private final ImageIcon no = new ImageIcon("main\\RPGStore\\Images\\no.png");
 
     private JLabel name = new JLabel("Name: ");
     private JLabel stats = new JLabel("Stats: ");
@@ -29,7 +29,7 @@ public class GUI2 {
     private JLabel amount = new JLabel("Amount: ");
     private JLabel[] textL = {name,stats,buyP,sellP,amount};
 
-    private final Font font = Font.createFont(Font.TRUETYPE_FONT, new File("Font\\pixelmix.ttf"));
+    private final Font font = Font.createFont(Font.TRUETYPE_FONT, new File("main\\RPGStore\\Font\\pixelmix.ttf"));
 
     public GUI2() throws IOException, FontFormatException {
         //Basic Stuff
@@ -61,7 +61,7 @@ public class GUI2 {
 
     private void loadImagesText(){
         for (int i = 0; i < 20; i++){
-            images[i] = new JLabel(new ImageIcon("Images\\View Items\\"+(i/4)+(i%4)+".png"));
+            images[i] = new JLabel(new ImageIcon("main\\RPGStore\\Images\\View Items\\"+(i/4)+(i%4)+".png"));
 
             if (i<5){
                 textL[i].setFont(font.deriveFont(14f));
